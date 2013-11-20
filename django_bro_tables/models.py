@@ -28,6 +28,7 @@ class Table(models.Model):
 
 class TableEntry(models.Model):
     table = models.ForeignKey(Table, related_name='entries')
+    date_added = models.DateTimeField('date added', auto_now_add=True)
     c0 = models.CharField(max_length=200)
     c1 = models.CharField(max_length=200, blank=True)
     c2 = models.CharField(max_length=200, blank=True)
