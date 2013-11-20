@@ -38,6 +38,7 @@ class Table(models.Model):
         f = 0
         data = [Type(*header)]
         for e in self.entries.all():
+            f = 0
             row = []
             for field in fields:
                 if field == "@timestamp":
