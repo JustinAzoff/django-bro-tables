@@ -26,6 +26,9 @@ class Table(models.Model):
     #comma seprated list of field names
     fields = models.CharField(max_length=200)
 
+    def __unicode__(self):
+        return self.name
+
 class TableEntry(models.Model):
     table = models.ForeignKey(Table, related_name='entries')
     timestamp = models.DateTimeField('date added', auto_now_add=True)
