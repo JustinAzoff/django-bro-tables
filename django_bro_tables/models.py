@@ -36,8 +36,7 @@ class Table(models.Model):
         header = self.fields.replace("@",'').split(",")
         Type = collections.namedtuple("Item", header)
         f = 0
-        header[0] = "#" + header[0]
-        data = [Type(*header)]
+        data = []
         for e in self.entries.all():
             f = 0
             row = []

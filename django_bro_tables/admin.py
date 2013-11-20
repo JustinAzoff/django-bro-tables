@@ -29,6 +29,9 @@ class TableEntryAdmin(admin.ModelAdmin):
     search_fields = ['pattern', 'comment']
     list_display = ['table'] + COLS
     list_editable = COLS
+
+    date_hierarchy = 'timestamp'
+    list_filter = ['table']
     
 
 admin.site.register(Regex, RegexAdmin)

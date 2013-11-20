@@ -18,6 +18,12 @@ class BroTSVRenderer(BaseRenderer):
 
         csv_buffer = StringIO()
         csv_writer = csv.writer(csv_buffer, dialect='excel-tab')
+        
+        if data:
+            header = list(data[0]._fields)
+            header[0] = '#' + header[0]
+            data = [header] + data
+
         for row in data:
             # Assume that strings should be encoded as UTF-8
             csv_writer.writerow([
