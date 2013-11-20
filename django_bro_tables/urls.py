@@ -8,5 +8,5 @@ router.register(r'regex', views.RegexViewSet)
 
 urlpatterns = patterns('',
     url(r'^', include(router.urls)),
-    url(r'regex/(?P<name>\S+).csv$', views.CSV.as_view(), name='csv')
+    url(r'regex/csv/(?P<name>\S+).csv$', views.CSV.as_view(), name='regex-csv'),
 )
