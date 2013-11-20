@@ -14,8 +14,14 @@ class RegexEntryAdmin(admin.ModelAdmin):
     list_filter = ['regex', 'disabled']
     date_hierarchy = 'date_added'
 
+
+class TableEntryInline(admin.TabularInline):
+    model = TableEntry
+    extra = 3
+
 class TableAdmin(admin.ModelAdmin):
     list_display = ['name', 'comment', 'num_fields']
+    inlines = [TableEntryInline]
 
 COLS = 'c0 c1 c2 c3 c4 c5'.split()
 
