@@ -7,8 +7,11 @@ router = routers.DefaultRouter()
 router.register(r'regex', views.RegexViewSet)
 router.register(r'regexentry', views.RegexEntryViewSet)
 
+router.register(r'table', views.TableViewSet)
+
 urlpatterns = patterns('',
-    url(r'regex/(?P<pk>[0-9]+)/$', views.RegexDetailView.as_view(), name='regex-detail'),
-    url(r'regex/csv/(?P<name>\S+).csv$', views.CSV.as_view(), name='regex-csv'),
-    url(r'^', include(router.urls)),
+    url(r'api/regex/(?P<pk>[0-9]+)/$', views.RegexDetailView.as_view(), name='regex-detail'),
+    url(r'api/regex/csv/(?P<name>\S+).csv$', views.RegexFlat.as_view(), name='regex-csv'),
+    url(r'api/table/flat/(?P<name>\S+).csv$', views.TableFlat.as_view(), name='table-flat'),
+    url(r'api/', include(router.urls)),
 )

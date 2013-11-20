@@ -1,4 +1,7 @@
-from django_bro_tables.models import Regex, RegexEntry
+from django_bro_tables.models import (
+    Regex, RegexEntry,
+    Table,
+)
 from rest_framework import serializers
 
 class RegexEntrySerializer(serializers.HyperlinkedModelSerializer):
@@ -18,3 +21,9 @@ class RegexDetailSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Regex
         fields = ( 'csv', 'url', 'name', 'comment', 'disabled', 'entries')
+
+class TableSerializer(serializers.HyperlinkedModelSerializer):
+    flat = serializers.HyperlinkedIdentityField(view_name='table-flat', format='csv', lookup_field='name')
+    class Meta:
+        model = Table
+        fields = ( 'flat','url','name','comment','num_fields','fields')

@@ -1,4 +1,5 @@
 from django.db import models
+import collections
 
 class Regex(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -28,6 +29,24 @@ class Table(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def flat_entries(self):
+        fields = self.fields.split(",")
+        header = self.fields.replace("@",'').split(",")
+        Type = collections.namedtuple("Item", header)
+        f = 0
+        data = [Type(*header)]
+        for e in self.entries.all():
+            row = []
+            for field in fields:
+                if field == "@timestamp":
+                    row.append(e.timestamp.strftime("%s"))
+                else:
+                    row.append(getattr(e, "c%d" % f))
+                    f += 1
+            data.append(Type(*row))
+        return data
 
 class TableEntry(models.Model):
     table = models.ForeignKey(Table, related_name='entries')
