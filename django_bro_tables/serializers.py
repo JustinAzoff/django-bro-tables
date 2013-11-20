@@ -7,9 +7,14 @@ class RegexEntrySerializer(serializers.HyperlinkedModelSerializer):
         fields = ('pattern', 'flags', 'comment', 'disabled', 'regex')
 
 class RegexSerializer(serializers.HyperlinkedModelSerializer):
+    csv = serializers.HyperlinkedIdentityField(view_name='regex-csv', format='csv', lookup_field='name')
+    class Meta:
+        model = Regex
+        fields = ( 'csv', 'url', 'name', 'comment', 'disabled')
+
+class RegexDetailSerializer(serializers.HyperlinkedModelSerializer):
     entries = RegexEntrySerializer(many=True, read_only=True)
     csv = serializers.HyperlinkedIdentityField(view_name='regex-csv', format='csv', lookup_field='name')
     class Meta:
         model = Regex
         fields = ( 'csv', 'url', 'name', 'comment', 'disabled', 'entries')
-

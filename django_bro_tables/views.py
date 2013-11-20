@@ -1,17 +1,22 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
+from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from rest_framework_csv import renderers as r
 
 from django_bro_tables.models import Regex, RegexEntry
-from django_bro_tables.serializers import RegexEntrySerializer, RegexSerializer
+from django_bro_tables.serializers import RegexEntrySerializer, RegexDetailSerializer, RegexSerializer
 
 class RegexViewSet(viewsets.ModelViewSet):
     queryset = Regex.objects.all()
     serializer_class = RegexSerializer
+
+class RegexDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Regex.objects.all()
+    serializer_class = RegexDetailSerializer
 
 class RegexEntryViewSet(viewsets.ModelViewSet):
     queryset = RegexEntry.objects.all()
