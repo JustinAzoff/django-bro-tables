@@ -7,13 +7,13 @@ class RegexEntryInline(admin.TabularInline):
 
 class RegexAdmin(admin.ModelAdmin):
     list_display = ['name', 'comment', 'disabled']
-    inlines = [ RegexEntryInline ] 
 
 class RegexEntryAdmin(admin.ModelAdmin):
     search_fields = ['pattern', 'comment']
     list_display = ['regex', 'pattern', 'flags', 'comment', 'disabled']
     list_editable = ['pattern', 'flags', 'comment', 'disabled']
-    list_filter = ['disabled']
+    list_filter = ['regex', 'disabled']
+    date_hierarchy = 'date_added'
     
 
 admin.site.register(Regex, RegexAdmin)
