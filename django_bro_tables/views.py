@@ -23,7 +23,7 @@ class RegexEntryViewSet(viewsets.ModelViewSet):
     serializer_class = RegexEntrySerializer
 
 class RegexCsvRenderer(r.CSVRenderer):
-    headers = ['pattern', 'flags', 'comment']
+    headers = ['pattern', 'flags', 'comment','date_added']
 
 class CSV(APIView):
     model = Regex

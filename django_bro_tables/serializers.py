@@ -4,7 +4,7 @@ from rest_framework import serializers
 class RegexEntrySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = RegexEntry
-        fields = ('pattern', 'flags', 'comment', 'disabled', 'regex')
+        fields = ('pattern', 'flags', 'comment', 'disabled', 'regex', 'date_added')
 
 class RegexSerializer(serializers.HyperlinkedModelSerializer):
     csv = serializers.HyperlinkedIdentityField(view_name='regex-csv', format='csv', lookup_field='name')
