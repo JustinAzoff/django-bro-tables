@@ -32,5 +32,5 @@ class CSV(APIView):
     def get(self, request, name, format=None):
         regex = get_object_or_404(Regex, name=name)
         entries = [e for e in regex.entries.all() if not e.disabled]
-        serializer = RegexEntrySerializer(entries, many=True)
+        serializer = RegexEntrySerializer(entries, many=True, context={'request': request})
         return Response(serializer.data)
