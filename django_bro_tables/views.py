@@ -6,16 +6,16 @@ from rest_framework.response import Response
 
 from rest_framework_csv import renderers as r
 
-from django_bro_tables.models import Regex
+from django_bro_tables.models import Regex, RegexEntry
 from django_bro_tables.serializers import RegexEntrySerializer, RegexSerializer
 
 class RegexViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
     queryset = Regex.objects.all()
     serializer_class = RegexSerializer
 
+class RegexEntryViewSet(viewsets.ModelViewSet):
+    queryset = RegexEntry.objects.all()
+    serializer_class = RegexEntrySerializer
 
 class RegexCsvRenderer(r.CSVRenderer):
     headers = ['pattern', 'flags', 'comment']

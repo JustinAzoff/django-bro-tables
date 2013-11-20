@@ -5,6 +5,7 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'regex', views.RegexViewSet)
+router.register(r'regexentry', views.RegexEntryViewSet)
 
 urlpatterns = patterns('',
     url(r'^', include(router.urls)),
