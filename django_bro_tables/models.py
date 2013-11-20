@@ -5,6 +5,9 @@ class Regex(models.Model):
     comment = models.CharField(max_length=100)
     disabled = models.BooleanField(default=False)
 
+    def __unicode__(self):
+        return self.name
+
 class RegexEntry(models.Model):
     regex = models.ForeignKey(Regex)
     pattern = models.CharField(max_length=200)
