@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Bro Tables</h2>
+    <ul>
+        {% for table in object_list %}
+            <li><a href="api/table/flat/{{table.name}}.csv">{{ table.name }}.csv</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

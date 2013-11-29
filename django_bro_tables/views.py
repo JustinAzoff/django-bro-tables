@@ -1,6 +1,6 @@
 from rest_framework.settings import api_settings
-from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django.views.generic import ListView
 from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework.views import APIView
@@ -55,3 +55,7 @@ class TableFlat(APIView):
         table = get_object_or_404(Table, name=name)
         entries = table.flat_entries
         return Response(entries)
+
+
+class TableList(ListView):
+    model = Table
