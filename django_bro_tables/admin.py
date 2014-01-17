@@ -4,8 +4,13 @@ from django_bro_tables.models import (
     Table, TableEntry,
 )
 
+class RegexEntryInline(admin.TabularInline):
+    model = RegexEntry
+    extra = 3
+
 class RegexAdmin(admin.ModelAdmin):
     list_display = ['name', 'comment', 'disabled']
+    inlines = [RegexEntryInline]
 
 class RegexEntryAdmin(admin.ModelAdmin):
     search_fields = ['pattern', 'comment']
