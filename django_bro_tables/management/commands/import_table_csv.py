@@ -2,6 +2,7 @@ import os
 from django.core.management.base import BaseCommand, CommandError
 from django_bro_tables.models import Table, TableEntry
 import datetime
+import pytz
 
 import csv
 
@@ -29,14 +30,17 @@ class Command(BaseCommand):
 
         for rec in data:
             pairs = zip(fields, rec)
+            mapping = dict(pairs)
             obj = {}
 
-            ts = None
+            if "timestamp" in mapping:
+                ts = datetime.datetime.fromtimestamp(int(mapping["timestamp"]), tz=pytz.utc)
+                pairs = [(k,v) for (k,v) in pairs if k != "timestamp"]
+            else:
+                ts = None
+
             for col, (k,v) in enumerate(pairs):
-                if k == "timestamp":
-                    ts = datetime.datetime.fromtimestamp(int(v))
-                else:
-                    obj["c%d" % col] = v
+                obj["c%d" % col] = v
 
             entry = table.entries.create(**obj)
             if ts:
