@@ -20,4 +20,7 @@ class Command(BaseCommand):
         for rec in csv.reader(open(filename)):
             padded = rec + ['','']
             pattern,flags,comment = padded[0:3]
-            regex.entries.create(pattern=pattern, flags=flags, comment=comment)
+            disabled  = pattern.startswith("#")
+            if disabled:
+                pattern = pattern.lstrip("#")
+            regex.entries.create(pattern=pattern, flags=flags, comment=comment, disabled=disabled)
