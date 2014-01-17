@@ -20,8 +20,7 @@ class BroTSVRenderer(BaseRenderer):
         csv_writer = csv.writer(csv_buffer, dialect='excel-tab')
         
         if data:
-            header = list(data[0]._fields)
-            header[0] = '#' + header[0]
+            header = ["#fields"] + list(data[0]._fields)
             data = [header] + data
 
         for row in data:
