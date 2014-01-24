@@ -13,6 +13,8 @@ class BroTSVRenderer(BaseRenderer):
         """
         Renders serialized *data* into CSV. For a dictionary:
         """
+        if isinstance(data, dict):
+            return data['detail']
         if data is None:
             return ''
 
