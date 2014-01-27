@@ -11,7 +11,7 @@ EXPECTED_TABLE_CSV = """
 #fields	ip	port	comment	timestamp
 1.2.3.4	22	very bad	1383264000
 5.6.7.8	80	very bad	1383264000
-""".lstrip().replace("\n", "\r\n")
+""".lstrip()
 
 
 class CSVTestCase(TestCase):
