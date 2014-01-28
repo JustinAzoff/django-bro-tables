@@ -31,7 +31,7 @@ class TableAdmin(admin.ModelAdmin):
 COLS = 'c0 c1 c2 c3 c4 c5'.split()
 
 class TableEntryAdmin(admin.ModelAdmin):
-    search_fields = ['pattern', 'comment']
+    search_fields = COLS
     list_display = ['table'] + COLS
     list_editable = COLS
 
