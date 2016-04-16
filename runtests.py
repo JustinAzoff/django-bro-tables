@@ -1,5 +1,6 @@
 import os, sys
 from django.conf import settings
+import django
 
 settings.configure(DEBUG=True,
                USE_TZ=True,
@@ -15,8 +16,16 @@ settings.configure(DEBUG=True,
                               'django.contrib.admin',
                               'django_bro_tables',))
 
-from django.test.simple import DjangoTestSuiteRunner
-test_runner = DjangoTestSuiteRunner(verbosity=1)
-failures = test_runner.run_tests(['django_bro_tables', ])
+try:
+    # Django <= 1.8
+    from django.test.simple import DjangoTestSuiteRunner
+    test_runner = DjangoTestSuiteRunner(verbosity=1)
+except ImportError:
+    # Django >= 1.8
+    from django.test.runner import DiscoverRunner
+    test_runner = DiscoverRunner(verbosity=1)
+    django.setup()
+
+failures = test_runner.run_tests(['django_bro_tables'])
 if failures:
     sys.exit(failures)
