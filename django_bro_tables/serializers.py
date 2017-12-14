@@ -23,8 +23,7 @@ class RegexDetailSerializer(serializers.HyperlinkedModelSerializer):
         fields = ( 'csv', 'url', 'name', 'comment', 'disabled', 'entries')
 
 class TableSerializer(serializers.HyperlinkedModelSerializer):
-    flat = serializers.HyperlinkedIdentityField(view_name='bro_table-flat', format='csv', lookup_field='name')
+    flat = serializers.HyperlinkedIdentityField(view_name='bro_table-csv', format='csv', lookup_field='name')
     class Meta:
         model = Table
-        fields = ( 'flat','url','name','comment','num_fields','fields')
-        view_name = "bro_table-detail"
+        fields = ( 'flat', 'name','comment','num_fields','fields')

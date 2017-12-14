@@ -40,6 +40,7 @@ class TableViewSet(viewsets.ModelViewSet):
 class RegexFlat(APIView):
     model = Regex
     renderer_classes = [RegexCsvRenderer] + api_settings.DEFAULT_RENDERER_CLASSES
+    queryset = Regex.objects.none() #Required for DjangoModelPermissions
 
     def get(self, request, name, format=None):
         regex = get_object_or_404(Regex, name=name)
@@ -50,6 +51,7 @@ class RegexFlat(APIView):
 class TableFlat(APIView):
     model = Table
     renderer_classes = [BroTSVRenderer]
+    queryset = Table.objects.none() #Required for DjangoModelPermissions
 
     def get(self, request, name, format=None):
         table = get_object_or_404(Table, name=name)
