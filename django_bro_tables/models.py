@@ -10,7 +10,7 @@ class Regex(models.Model):
         return self.name
 
 class RegexEntry(models.Model):
-    regex = models.ForeignKey(Regex, related_name='entries')
+    regex = models.ForeignKey(Regex, related_name='entries', on_delete=models.CASCADE)
     pattern = models.CharField(max_length=200, unique=True)
     flags = models.CharField(max_length=10, default='e')
     comment = models.CharField(max_length=100)
@@ -50,7 +50,7 @@ class Table(models.Model):
         return data
 
 class TableEntry(models.Model):
-    table = models.ForeignKey(Table, related_name='entries')
+    table = models.ForeignKey(Table, related_name='entries', on_delete=models.CASCADE)
     timestamp = models.DateTimeField('date added', auto_now_add=True)
     c0 = models.CharField(max_length=200)
     c1 = models.CharField(max_length=200, blank=True)
